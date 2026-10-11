@@ -2,6 +2,6 @@ package net.bayruby.contractnpc.client;
 
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 
-public record EmeraldCostTooltip(int amount)
+public record BronzeCostTooltip(long amount)
         implements TooltipComponent {
 }

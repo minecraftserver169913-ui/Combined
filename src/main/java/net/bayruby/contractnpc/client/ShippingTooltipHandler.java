@@ -25,23 +25,25 @@ public class ShippingTooltipHandler {
     ) {
         ItemStack stack = event.getItemStack();
 
-        int cost = getShippingCost(stack);
+        int itemCost = getShippingCost(stack);
 
-        if (cost <= 0) {
+        if (itemCost <= 0) {
             return;
         }
 
+        // Calculate the value of the entire stack.
+        long totalCost = (long) itemCost * stack.getCount();
+
+        // Insert the custom coin tooltip.
         event.getTooltipElements().add(
                 1,
                 Either.right(
-                        new EmeraldCostTooltip(cost)
+                        new BronzeCostTooltip(totalCost)
                 )
         );
     }
 
-    private static int getShippingCost(
-            ItemStack stack
-    ) {
+    private static int getShippingCost(ItemStack stack) {
         ResourceLocation itemId =
                 stack.getItemHolder()
                         .unwrapKey()
@@ -55,7 +57,6 @@ public class ShippingTooltipHandler {
         String id = itemId.toString();
 
         for (String entry : Config.ITEM_STRINGS.get()) {
-
             String[] parts = entry.split("=", 2);
 
             if (parts.length != 2) {
@@ -67,7 +68,7 @@ public class ShippingTooltipHandler {
             }
 
             try {
-                return Integer.parseInt(parts[1]);
+                return Integer.parseInt(parts[1].trim());
             } catch (NumberFormatException ignored) {
                 return -1;
             }
