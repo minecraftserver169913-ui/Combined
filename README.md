@@ -1,19 +1,16 @@
 # Combined Mod Project
 
-This repository contains two NeoForge mods shipped in a single project:
-
-- Contract NPC (`contractnpc`) — the primary mod
-- Villager (`villager`) — the secondary imported mod that lives under the `net.bayruby.contractnpc.villager` package
+This repository is a single NeoForge mod project that contains the core Contract NPC features and the imported villager NPC framework under the `net.bayruby.contractnpc.villager` package.
 
 ## Structure
 
 - `src/main/java/net/bayruby/contractnpc/` — main Contract NPC registrations, items, blocks, menus, and gameplay systems
-- `src/main/java/net/bayruby/contractnpc/villager/` — secondary Villager mod logic, entities, NPC system, and trade handling
+- `src/main/java/net/bayruby/contractnpc/villager/` — villager NPC logic, entities, NPC definitions, trades, and contracts
 - `src/main/resources/` — shared resources and generated data
-- `src/main/templates/META-INF/neoforge.mods.toml` — combined mod metadata for both mods in the same jar
+- `src/main/templates/META-INF/neoforge.mods.toml` — mod metadata for the combined project
 
 ## Notes
 
-- Both mods are intentionally kept in the same repository for easier maintenance.
-- Each mod still has its own `@Mod` entry and mod id, so they can be loaded independently inside the same build.
-- The `villager` package is treated as the imported secondary mod and is not a separate project build.
+- The villager logic is integrated into the main mod registration flow instead of being loaded as a separate NeoForge mod.
+- The code remains organized under the `villager` package for maintainability without creating a duplicate mod entrypoint.
+- This keeps the mod loaded as a single combined project while retaining the original villager systems.
