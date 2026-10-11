@@ -1,25 +1,19 @@
+# Combined Mod Project
 
-Installation information
-=======
+This repository contains two NeoForge mods shipped in a single project:
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+- Contract NPC (`contractnpc`) — the primary mod
+- Villager (`villager`) — the secondary imported mod that lives under the `net.bayruby.contractnpc.villager` package
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+## Structure
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+- `src/main/java/net/bayruby/contractnpc/` — main Contract NPC registrations, items, blocks, menus, and gameplay systems
+- `src/main/java/net/bayruby/contractnpc/villager/` — secondary Villager mod logic, entities, NPC system, and trade handling
+- `src/main/resources/` — shared resources and generated data
+- `src/main/templates/META-INF/neoforge.mods.toml` — combined mod metadata for both mods in the same jar
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+## Notes
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+- Both mods are intentionally kept in the same repository for easier maintenance.
+- Each mod still has its own `@Mod` entry and mod id, so they can be loaded independently inside the same build.
+- The `villager` package is treated as the imported secondary mod and is not a separate project build.
