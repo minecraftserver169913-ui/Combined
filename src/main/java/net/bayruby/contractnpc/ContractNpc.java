@@ -2,9 +2,9 @@ package net.bayruby.contractnpc;
 
 import net.bayruby.contractnpc.block.ModBlocks;
 import net.bayruby.contractnpc.item.ModItems;
-
 import net.bayruby.contractnpc.menu.ModMenus;
 import net.bayruby.contractnpc.shipping.ModAttachments;
+import net.bayruby.contractnpc.villager.Villager;
 import net.minecraft.world.item.CreativeModeTabs;
 
 import net.neoforged.bus.api.IEventBus;
@@ -29,14 +29,15 @@ public class ContractNpc {
             IEventBus modEventBus,
             ModContainer modContainer
     ) {
-
         ITEMS.register(modEventBus);
 
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
-
         ModAttachments.ATTACHMENTS.register(modEventBus);
         ModMenus.MENUS.register(modEventBus);
+
+        Villager.register(modEventBus);
+        Villager.registerConfig(modContainer);
 
         modEventBus.addListener(this::addCreative);
 
@@ -53,7 +54,6 @@ public class ContractNpc {
     private void addCreative(
             BuildCreativeModeTabContentsEvent event
     ) {
-
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.SHIPPING_CONTAINER.get());
             event.accept(ModItems.POTATO_SPROUTS.get());
